@@ -13,6 +13,7 @@ import java.util.*;
 public class Main {
     static ArrayList<Obstacle> obstacles = getObstacles();
     static ArrayList<Player> players = getPlayers();
+
     public static void main(String[] args) {
         while (true) {
             boolean allFinished = true;
@@ -27,6 +28,7 @@ public class Main {
             // }
         }
     }
+
     private static ArrayList<Obstacle> getObstacles() {
         // TODO добавить рандомную генерацию
         return new ArrayList<>(List.of(
@@ -45,6 +47,7 @@ public class Main {
                 new Track(140)
         ));
     }
+
     private static ArrayList<Player> getPlayers() {
         return new ArrayList<>(List.of(
                 new People(obstacles),
@@ -53,21 +56,26 @@ public class Main {
         ));
     }
 }
+
 @Getter
 abstract class Obstacle {
     private final double value; // размер препятсвия (длина дорожки/высота препятствия)
+
     public Obstacle(double value) {
         this.value = value;
     }
+
     public String getType() {
         return this.getClass().getSimpleName();
     }
 }
+
 class Track extends Obstacle {
     public Track(double value) {
         super(value);
     }
 }
+
 class Wall extends Obstacle {
     public Wall(double value) {
         super(value);
@@ -87,6 +95,7 @@ abstract class Player {
     private double needStamina = 0; // Требуется выносливости
     private String lastMessage = null;
     private boolean finish = false; // Закончил
+
     public static void getView(ArrayList<Obstacle> queue, ArrayList<Player> players) {
         ArrayList<String[]> track = new ArrayList<>();
         boolean isWall;
@@ -106,7 +115,7 @@ abstract class Player {
                 line[idx++] = player.getStep() == step
                         ? val.replace("_", String.valueOf(player.getType().toCharArray()[0]))
                         : val.replace("_", " ");
-                        // : (isWall ? val.replace("_", "#") : val.replace("_", " "));
+                //        : (isWall ? val.replace("_", "#") : val.replace("_", " "));
             }
             track.add(line);
             step++;
@@ -124,15 +133,17 @@ abstract class Player {
                         pl.step,
                         pl.lastMessage != null ? pl.lastMessage : (pl.finish ? "Закончил" : "В процессе")
                 );
+            } else {
+                System.out.print("\n");
             }
-            else System.out.print("\n");
         }
     }
+
     /**
-     * @param rangeRun - дистанция бега за 1пт. (staminaUseRun) выносливости
-     * @param rangeJump - высота прыжка
+     * @param rangeRun        - дистанция бега за 1пт. (staminaUseRun) выносливости
+     * @param rangeJump       - высота прыжка
      * @param staminaRecovery - восстановление выносливости за шаг
-     * @param queue - полоса препятствий
+     * @param queue           - полоса препятствий
      */
     public Player(double rangeRun, double rangeJump, int staminaRecovery, ArrayList<Obstacle> queue) {
         this.rangeRun = rangeRun;
@@ -140,9 +151,12 @@ abstract class Player {
         this.staminaRecovery = staminaRecovery;
         this.queueObstacle = new ArrayDeque<>(queue);
     }
+
     public void next() {
         if (this.lastObstacle == null) {
-            if ((this.lastObstacle = this.queueObstacle.poll()) == null) this.finish = true; // Устанавливаем последнее препятствие
+            if ((this.lastObstacle = this.queueObstacle.poll()) == null) {
+                this.finish = true; // Устанавливаем последнее препятствие
+            }
         }
         if (this.lastObstacle != null) {
             switch (this.lastObstacle.getType()) { // Действие
@@ -151,15 +165,19 @@ abstract class Player {
             }
         }
     }
+
     public String getType() {
         return this.getClass().getSimpleName();
     }
+
     public boolean getFinish() {
         return this.finish;
     }
+
     public int getStep() {
         return this.step;
     }
+
     private void run(double distance) {
         if (distance > this.rangeRun && !this.finish) {
             this.lastMessage = "Не смог пробежать (" + this.rangeRun + "/" + distance + ")";
@@ -167,6 +185,7 @@ abstract class Player {
         }
         this.action(Player.staminaUseRun * (distance / this.rangeRun));
     }
+
     private void jump(double height) {
         if (height > this.rangeJump && !this.finish) {
             this.lastMessage = "Не смог перепрыгнуть (" + this.rangeJump + "/" + height + ")";
@@ -174,6 +193,7 @@ abstract class Player {
         }
         this.action(Player.staminaUseJump * (height / this.rangeJump));
     }
+
     private void action(double useStamina) {
         if (this.finish) return; // более не участвует
         this.needStamina = useStamina;
@@ -189,16 +209,19 @@ abstract class Player {
         if (this.stamina > 100) this.stamina = 100;
     }
 }
+
 class People extends Player {
     public People(ArrayList<Obstacle> queue) {
         super(150, 1.2, 15, queue);
     }
 }
+
 class Cat extends Player {
     public Cat(ArrayList<Obstacle> queue) {
         super(250, 1.6, 20, queue);
     }
 }
+
 class Robot extends Player {
     public Robot(ArrayList<Obstacle> queue) {
         super(1000, 0.6, 0, queue);
