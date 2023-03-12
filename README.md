@@ -78,6 +78,7 @@ class Main {
 ```
 
 </details>
+<details class="desc"><summary>Стили для IDE</summary>
 
 <style>
 .desc {
@@ -96,3 +97,5 @@ class Main {
     padding: 0.3em 0.6em;
 }
 </style>
+
+</details>
