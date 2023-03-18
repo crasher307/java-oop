@@ -78,6 +78,17 @@ class Main {
 ```
 
 </details>
+<details class="desc"><summary>Урок 3. Некоторые стандартные интерфейсы Java и примеры их использования</summary>
+
+[Работа во время семинара](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson3/work)\
+[Домашнее задание](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson3/homework)
+```text
+1. Доделать вариации с игрой на английском/русском языке, сигнатуры уже приведены в прикрепленном файле
+2. Улучшить интерфейсную часть игры
+3. * создать историю ходов и по окончании игры вывести её, в зависимости от ответа пользователя (y-вывести, n -выводить не следует)
+```
+
+</details>
 <details class="desc"><summary>Стили для IDE</summary>
 
 <style>
