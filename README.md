@@ -89,6 +89,17 @@ class Main {
 ```
 
 </details>
+<details class="desc"><summary>Урок 4. ООП: Обобщения. ч1</summary>
+
+~~[Работа во время семинара](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson4/work)~~\
+[Домашнее задание](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson4/homework)
+```text
+1. Расширить класс калькулятор на умножение
+2. Расширить класс калькулятор на деление
+3. Расширить класс калькулятор на бинарный перевод(принимаемые значения как стринг, так и инт - тут необходимо подумать как наилучшим образом реализовать, что будет если будут приниматься округляемые Double/Float (округляемые -> с нулем на конце прим. 3.0 , 4.0 и тд т))
+```
+
+</details>
 <details class="desc"><summary>Стили для IDE</summary>
 
 <style>
