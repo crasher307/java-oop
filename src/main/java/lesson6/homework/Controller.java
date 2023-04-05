@@ -1,31 +1,35 @@
 package lesson6.homework;
 
-// TODO Дописать склады и заказы
-final class Controller {
-    static void addProduct(String name, double price) {
-        IProduct.create(name, price);
+import java.util.ArrayList;
+import java.util.List;
+
+class Controller<T> {
+    private final List<? super T> data = new ArrayList<>();
+
+    // public List<? super T> find(String field, Object value) {
+    //     return this.data.stream().filter(model -> {
+    //         try {
+    //             return model.getClass().getDeclaredField(field).get(model).equals(value);
+    //         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+    //         return false;
+    //     }).toList();
+    // }
+
+    public List<? super T> get() {
+        return this.data;
     }
 
-    static void removeProduct(int id) {
-        IProduct.remove(IProduct.getById(id));
+    public T add(T obj) {
+        this.data.add(obj);
+        return obj;
     }
 
-    static void viewProduct(int id) {
-        IProduct p = IProduct.getById(id);
-        if (p == null) Viewer.error("Товар не найден");
-        else Viewer.info("Товар:\n\tID: %d\n\tНаименование: %s\n\tСтоимость: %1.2f\n",
-                p.getId(),
-                p.getName(),
-                p.getPrice()
-        );
+    public void remove(T obj) {
+        this.data.remove(obj);
     }
 
-    static void viewProducts() {
-        for (IProduct item : IProduct.data) {
-            Viewer.info("Товар:\n\tID: %d\n\tНаименование: %s\n\tСтоимость: %1.2f\n",
-                    item.getId(),
-                    item.getName(),
-                    item.getPrice());
-        }
+    @Override
+    public String toString() {
+        return String.format("%s[%s]", this.getClass().getSimpleName(), this.data);
     }
 }
