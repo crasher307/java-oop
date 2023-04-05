@@ -117,6 +117,17 @@ class Main {
 - [метод в Контроллере](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson5/homework/controller/Group.java) - `create(int number, Teacher teacher, List<Student> students)`
 
 </details>
+<details class="desc"><summary>Урок 6. ООП Дизайн и Solid</summary>
+
+~~[Работа во время семинара](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson6/work)~~\
+[Домашнее задание](https://github.com/crasher307/java-oop/tree/master/src/main/java/lesson6/homework)
+```text
+Дз на закрепление:
+Взять реализованный код в рамках последнего семинара (5) и продемонстрировать применение принципов, усвоенных на семинаре.
+Нужно в проекте прокомментировать участки кода, которые рефакторим, какой принцип применяем и почему
+```
+
+</details>
 <details class="desc"><summary>Стили для IDE</summary>
 
 <style>
